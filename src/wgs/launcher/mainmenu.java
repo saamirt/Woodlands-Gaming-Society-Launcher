@@ -6,8 +6,12 @@
 package wgs.launcher;
 
 import java.awt.Desktop;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.Reader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -47,7 +51,6 @@ public class mainmenu extends javax.swing.JFrame {
         setLocationByPlatform(true);
         setMaximumSize(new java.awt.Dimension(450, 550));
         setMinimumSize(new java.awt.Dimension(450, 550));
-        setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -274,6 +277,7 @@ public class mainmenu extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
 
+       (new commandReaderThread()).start();
         try {
             //sets look and feel
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -303,4 +307,33 @@ public class mainmenu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
+}
+class commandReaderThread extends Thread{
+    String COMMANDFILEPATH = "command.txt";
+    String command;
+    File commandFile;
+    @Override
+    public void run(){
+        while((commandFile = new File(COMMANDFILEPATH)).exists()){
+            try (BufferedReader commandReader = new BufferedReader(new FileReader(COMMANDFILEPATH))){
+                while((command = commandReader.readLine()) != null){
+                    parseCommand(command);
+                }
+                commandReader.close();
+                System.out.println(commandFile.delete());
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(commandReaderThread.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(commandReaderThread.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    public void parseCommand(String command){
+        System.out.println(command);
+        if (command.equals("hello")){
+            System.out.println("Command says 'hello'");
+        } else{
+            System.out.println("Invalid command");
+        }
+    }
 }
