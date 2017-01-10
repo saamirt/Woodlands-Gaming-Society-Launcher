@@ -11,7 +11,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,7 +21,7 @@ import java.util.logging.Logger;
 public class mainmenu extends javax.swing.JFrame {
 
     /**
-     * Creates new form mainmenu
+     * Creates new form
      */
     public mainmenu() {
         initComponents();
@@ -49,8 +48,10 @@ public class mainmenu extends javax.swing.JFrame {
         setTitle("Woodlands Gaming Society Launcher");
         setBackground(new java.awt.Color(255, 51, 51));
         setLocationByPlatform(true);
-        setMaximumSize(new java.awt.Dimension(450, 550));
-        setMinimumSize(new java.awt.Dimension(450, 550));
+        setMaximumSize(new java.awt.Dimension(495, 695));
+        setMinimumSize(new java.awt.Dimension(495, 695));
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(495, 695));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -198,6 +199,7 @@ public class mainmenu extends javax.swing.JFrame {
         getAccessibleContext().setAccessibleDescription("");
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseClicked
@@ -307,33 +309,4 @@ public class mainmenu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
-}
-class commandReaderThread extends Thread{
-    String COMMANDFILEPATH = "command.txt";
-    String command;
-    File commandFile;
-    @Override
-    public void run(){
-        while((commandFile = new File(COMMANDFILEPATH)).exists()){
-            try (BufferedReader commandReader = new BufferedReader(new FileReader(COMMANDFILEPATH))){
-                while((command = commandReader.readLine()) != null){
-                    parseCommand(command);
-                }
-                commandReader.close();
-                System.out.println(commandFile.delete());
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(commandReaderThread.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(commandReaderThread.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
-    public void parseCommand(String command){
-        System.out.println(command);
-        if (command.equals("hello")){
-            System.out.println("Command says 'hello'");
-        } else{
-            System.out.println("Invalid command");
-        }
-    }
 }
