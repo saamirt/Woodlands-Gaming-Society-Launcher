@@ -6,13 +6,12 @@
 package wgs.launcher;
 
 import java.awt.Desktop;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -216,11 +215,14 @@ public class mainmenu extends javax.swing.JFrame {
 
     private void btnPlayHaloMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPlayHaloMouseReleased
         btnPlayHalo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wgs/launcher/btn_PlayHalo.png")));
-        try {
-            Process p = new ProcessBuilder("src\\wgs\\launcher\\test.exe").start();
+        JOptionPane.showMessageDialog(new JFrame(), "This will open a game executable. Notice the animation of the buttons as they are clicked.");
+        
+        /*try {
+            Process p = new ProcessBuilder("src\\wgs\\launcher\\game.exe").start();
+            
         } catch (IOException ex) {
             Logger.getLogger(mainmenu.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
     }//GEN-LAST:event_btnPlayHaloMouseReleased
 
     private void btnPlayMCMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPlayMCMousePressed
@@ -229,11 +231,12 @@ public class mainmenu extends javax.swing.JFrame {
 
     private void btnPlayMCMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPlayMCMouseReleased
         btnPlayMC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wgs/launcher/btn_PlayMC.png")));
-        try {
-            Process p = new ProcessBuilder("src\\wgs\\launcher\\test.exe").start();
+        JOptionPane.showMessageDialog(new JFrame(), "This will open a game executable");
+        /*try {
+            Process p = new ProcessBuilder("src\\wgs\\launcher\\game.exe").start();
         } catch (IOException ex) {
             Logger.getLogger(mainmenu.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
     }//GEN-LAST:event_btnPlayMCMouseReleased
 
     private void btnCommunityMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCommunityMousePressed
@@ -242,8 +245,10 @@ public class mainmenu extends javax.swing.JFrame {
 
     private void btnCommunityMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCommunityMouseReleased
         btnCommunity.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wgs/launcher/btn_Community.png")));
+        JOptionPane.showMessageDialog(new JFrame(), "This will open the shared community folder. This is a folder where students can share files");
+        
         try {
-            Desktop.getDesktop().open(new File(new File(System.getProperty("user.home")), "Videos"));
+            Desktop.getDesktop().open(new File(System.getProperty("user.home"), "Videos"));
         } catch (IOException ex) {
             Logger.getLogger(mainmenu.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -279,7 +284,8 @@ public class mainmenu extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
 
-       (new commandReaderThread()).start();
+       (new EmailCommandReaderThread()).start();
+       (new FileCommandReaderThread()).start();
         try {
             //sets look and feel
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package wgs.launcher;
 
 import java.io.File;
@@ -5,27 +10,22 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 import javax.mail.BodyPart;
-import javax.mail.Flags;
-import javax.mail.Flags.Flag;
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.internet.MimeMultipart;
-import javax.mail.search.FlagTerm;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
-public class emailReader {
-    int initialMessageCount;
-    /*public static void main(String[] args) {
+class EmailCommandReaderThread extends Thread {
+    String COMMANDFILEPATH = "command.txt";
+    String command;
+    File commandFile;
 
-        emailReader gmail = new emailReader();
-        gmail.read();
-
-    }*/
-
-    public void read() {
-
+    @Override
+    public void run() {
         Properties props = new Properties();
         int messageCount;
         try {
@@ -33,7 +33,7 @@ public class emailReader {
             Session session = Session.getDefaultInstance(props, null);
 
             Store store = session.getStore("imaps");
-            store.connect("smtp.gmail.com", "woodlandsgamingclub@gmail.com", "REPLACETHIS");
+            store.connect("smtp.gmail.com", "woodlandsgamingclub@gmail.com", "*************************");
 
             /* listing folders
             for (Folder f : store.getDefaultFolder().list()) {
@@ -41,27 +41,36 @@ public class emailReader {
             }*/
             Folder emails = store.getFolder("NEW-COMMANDS");
             emails.open(Folder.READ_ONLY);
-            initialMessageCount = emails.getMessageCount();
-            
-            while(true){
+            int initialMessageCount = emails.getMessageCount();
+
+            while (true) {
                 /*displaying total number of messages
                 System.out.println("Total Messages:- " + messageCount);
                  */
 
                 if ((messageCount = emails.getMessageCount() - initialMessageCount) > 0) {
-                    Message[] messages = emails.getMessages(initialMessageCount+1,emails.getMessageCount());
+                    Message[] messages = emails.getMessages(initialMessageCount + 1, emails.getMessageCount());
                     for (int i = 0; i < messageCount; i++) {
                         String messageBody = getTextFromMessage(messages[i]);
-                        System.out.println("Command: " + messageBody.substring(messageBody.length()/2+1));
+                        System.out.println("Command: " + messageBody.substring(messageBody.length() / 2 + 1));
+                        parseCommand(messageBody.substring(messageBody.length() / 2 + 1));
                         initialMessageCount++;
                     }
                 }
-            /*emails.close(true);
+                /*emails.close(true);
             store.close();*/
             }
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void parseCommand(String command) {
+        if (command.toLowerCase().equals("sayhello")) {
+            JOptionPane.showMessageDialog(new JFrame(), "hello!");
+        } else {
+            JOptionPane.showMessageDialog(new JFrame(), "Invalid command");
         }
     }
 
