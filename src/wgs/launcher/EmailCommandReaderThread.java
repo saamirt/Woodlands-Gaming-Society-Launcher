@@ -33,7 +33,7 @@ class EmailCommandReaderThread extends Thread {
             Session session = Session.getDefaultInstance(props, null);
 
             Store store = session.getStore("imaps");
-            store.connect("smtp.gmail.com", "woodlandsgamingclub@gmail.com", "*************************");
+            store.connect("smtp.gmail.com", "woodlandsgamingclub@gmail.com", "********");
 
             /* listing folders
             for (Folder f : store.getDefaultFolder().list()) {
@@ -65,12 +65,14 @@ class EmailCommandReaderThread extends Thread {
             e.printStackTrace();
         }
     }
-
-    public void parseCommand(String command) {
-        if (command.toLowerCase().equals("sayhello")) {
+    
+    public void parseCommand(String command){
+        System.out.println("Command: " + command);
+        if (command.toLowerCase().equals("sayhello")){
             JOptionPane.showMessageDialog(new JFrame(), "hello!");
-        } else {
-            JOptionPane.showMessageDialog(new JFrame(), "Invalid command");
+            System.out.println("Command Activated");
+        } else{
+            System.out.println("Invalid Command");
         }
     }
 

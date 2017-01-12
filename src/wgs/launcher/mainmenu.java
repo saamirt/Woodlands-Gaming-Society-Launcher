@@ -6,6 +6,8 @@
 package wgs.launcher;
 
 import java.awt.Desktop;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -13,10 +15,6 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Aamir
- */
 public class mainmenu extends javax.swing.JFrame {
 
     /**
@@ -24,6 +22,8 @@ public class mainmenu extends javax.swing.JFrame {
      */
     public mainmenu() {
         initComponents();
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        settingsFrame.setLocation(dim.width/2-settingsFrame.getSize().width/2, dim.height/2-settingsFrame.getSize().height/2);
     }
 
     /**
@@ -35,13 +35,102 @@ public class mainmenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        settingsFrame = new javax.swing.JFrame();
+        buttonPanel = new javax.swing.JPanel();
+        bgSlider = new javax.swing.JSlider();
+        adminLabel = new javax.swing.JLabel();
+        bgLabel = new javax.swing.JLabel();
+        adminToggle = new javax.swing.JToggleButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         btnPlayHalo = new javax.swing.JLabel();
         btnPlayMC = new javax.swing.JLabel();
         btnCommunity = new javax.swing.JLabel();
         btnExit = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+
+        settingsFrame.setTitle("Settings");
+        settingsFrame.setMaximumSize(new java.awt.Dimension(350, 200));
+        settingsFrame.setMinimumSize(new java.awt.Dimension(350, 200));
+        settingsFrame.setName("Settings"); // NOI18N
+        settingsFrame.setResizable(false);
+
+        buttonPanel.setMaximumSize(new java.awt.Dimension(300, 145));
+        buttonPanel.setMinimumSize(new java.awt.Dimension(300, 145));
+
+        bgSlider.setMaximum(6);
+        bgSlider.setMinimum(1);
+        bgSlider.setMinorTickSpacing(1);
+        bgSlider.setPaintTicks(true);
+        bgSlider.setSnapToTicks(true);
+        bgSlider.setValue(1);
+        bgSlider.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                bgSliderStateChanged(evt);
+            }
+        });
+
+        adminLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        adminLabel.setText("Admin Mode");
+
+        bgLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        bgLabel.setText("Background Image");
+
+        adminToggle.setText("Off");
+        adminToggle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adminToggleActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout buttonPanelLayout = new javax.swing.GroupLayout(buttonPanel);
+        buttonPanel.setLayout(buttonPanelLayout);
+        buttonPanelLayout.setHorizontalGroup(
+            buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(buttonPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bgSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                    .addComponent(adminLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(adminToggle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bgLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        buttonPanelLayout.setVerticalGroup(
+            buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(buttonPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(bgLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bgSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(adminLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(adminToggle)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout settingsFrameLayout = new javax.swing.GroupLayout(settingsFrame.getContentPane());
+        settingsFrame.getContentPane().setLayout(settingsFrameLayout);
+        settingsFrameLayout.setHorizontalGroup(
+            settingsFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 350, Short.MAX_VALUE)
+            .addGroup(settingsFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(settingsFrameLayout.createSequentialGroup()
+                    .addGap(0, 25, Short.MAX_VALUE)
+                    .addComponent(buttonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 25, Short.MAX_VALUE)))
+        );
+        settingsFrameLayout.setVerticalGroup(
+            settingsFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 200, Short.MAX_VALUE)
+            .addGroup(settingsFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(settingsFrameLayout.createSequentialGroup()
+                    .addGap(0, 27, Short.MAX_VALUE)
+                    .addComponent(buttonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 28, Short.MAX_VALUE)))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Woodlands Gaming Society Launcher");
@@ -173,6 +262,17 @@ public class mainmenu extends javax.swing.JFrame {
                 .addGap(0, 0, 0))
         );
 
+        jButton1.setBorder(null);
+        jButton1.setContentAreaFilled(false);
+        jButton1.setMaximumSize(new java.awt.Dimension(32, 32));
+        jButton1.setMinimumSize(new java.awt.Dimension(32, 32));
+        jButton1.setPreferredSize(new java.awt.Dimension(32, 32));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -181,11 +281,17 @@ public class mainmenu extends javax.swing.JFrame {
                 .addGap(75, 75, 75)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(75, 75, 75))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(300, 300, 300)
+                .addGap(19, 19, 19)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 249, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50))
         );
@@ -274,6 +380,24 @@ public class mainmenu extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnCommunityMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        settingsFrame.setVisible(true);
+        System.out.println("Opening Settings");
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void adminToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminToggleActionPerformed
+        if (adminToggle.getText() == "Off"){
+            adminToggle.setText("On");
+        }else{
+            adminToggle.setText("Off");
+        }
+    }//GEN-LAST:event_adminToggleActionPerformed
+
+    private void bgSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_bgSliderStateChanged
+        System.out.println(bgSlider.getValue());
+    }//GEN-LAST:event_bgSliderStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -307,12 +431,19 @@ public class mainmenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel adminLabel;
+    private javax.swing.JToggleButton adminToggle;
+    private javax.swing.JLabel bgLabel;
+    private javax.swing.JSlider bgSlider;
     private javax.swing.JLabel btnCommunity;
     private javax.swing.JLabel btnExit;
     private javax.swing.JLabel btnPlayHalo;
     private javax.swing.JLabel btnPlayMC;
+    private javax.swing.JPanel buttonPanel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JFrame settingsFrame;
     // End of variables declaration//GEN-END:variables
 }
